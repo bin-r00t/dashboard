@@ -31,7 +31,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
 // Modules
-import ModulesHome from "layouts/modules";
+import Post from "layouts/modules/post";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -103,11 +103,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "ModuleHome",
-    key: "module",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/module",
-    component: <ModulesHome />,
+    name: "Post",
+    key: "post",
+    icon: <Icon fontSize="small">article</Icon>,
+    route: "/post",
+    component: <Post />,
     // collapse: [
     //   {
     //     type: "collapse",
