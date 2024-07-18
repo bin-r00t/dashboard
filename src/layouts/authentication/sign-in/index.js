@@ -6,22 +6,30 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-import http from "utils/http";
+import { useHttp } from "utils/http";
 
 function Basic() {
-  const email = useRef(null);
-  const password = useRef(null);
+  const { data, error, loading, doHttp } = useHttp("/api/auth/login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleInputEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function handleInputPassword(e) {
+    setPassword(e.target.value);
+  }
 
   async function handleLogin() {
     if (validation(email, password)) {
-      const response = await http("/api/auth/login", {
+      await doHttp({
         method: "post",
         data: JSON.stringify({
-          email: email.current.value,
-          password: password.current.value,
+          email: email,
+          password: password,
         }),
       });
-      console.log("res", email.current.value, password.current.value);
     }
   }
 
@@ -46,23 +54,11 @@ function Basic() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput ref={email} type="email" label="Email" fullWidth />
+              <MDInput type="email" label="Email" fullWidth onInput={handleInputEmail} />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput ref={password} type="password" label="Password" fullWidth />
+              <MDInput type="password" label="Password" fullWidth onInput={handleInputPassword} />
             </MDBox>
-            {/* <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;Remember me
-              </MDTypography>
-            </MDBox> */}
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" fullWidth onClick={handleLogin}>
                 sign in
