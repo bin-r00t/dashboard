@@ -68,19 +68,6 @@ const routes = [
     icon: <Icon fontSize="small">article</Icon>,
     route: "/post",
     component: <Post />,
-    // collapse: [
-    //   {
-    //     type: "collapse",
-    //     name: "A001",
-    //     key: "module/a001",
-    //     route: "/module/a001",
-    //     component: (
-    //       <div>
-    //         <h1>A001</h1>
-    //       </div>
-    //     ),
-    //   },
-    // ],
   },
   {
     type: "collapse",
